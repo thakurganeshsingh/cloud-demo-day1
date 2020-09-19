@@ -1,0 +1,123 @@
+openapi: 3.0.1
+info:
+  title: Harman-HealthCare
+  version: v0.1
+  description: |-
+    ---
+    tags: [employee]
+    ---
+
+    ## Employee-API
+    The attached is a sample APi for retrieving employee information through a get call
+
+    Sample use case was given by **Saumya**
+
+    To run this project you may use one of following
+
+    1. Generate Docker image and run as container using Dockerfile
+    2. Import as maven project and run as spring boot application
+servers:
+  - url: 'http://localhost:8080'
+    description: Generated server url
+paths:
+  /employee:
+    get:
+      tags:
+        - health-contoller
+      operationId: employee
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+              examples:
+                List of Employees:
+                  value:
+                    - empId: 1
+                      firstName: Noah
+                      lastName: Blose
+                      email: nblose0@spiegel.de
+                      gender: Male
+                      company: Shuffletag
+                    - empId: 2
+                      firstName: Jo-anne
+                      lastName: Jira
+                      email: jjira1@spotify.com
+                      gender: Female
+                      company: Meedoo
+                    - empId: 3
+                      firstName: Andriana
+                      lastName: Djuricic
+                      email: adjuricic2@apple.com
+                      gender: Female
+                      company: Voolith
+                    - empId: 4
+                      firstName: Lin
+                      lastName: Darrington
+                      email: ldarrington3@nih.gov
+                      gender: Male
+                      company: Quimm
+                    - empId: 5
+                      firstName: Aurelea
+                      lastName: Labrenz
+                      email: alabrenz4@comcast.net
+                      gender: Female
+                      company: Yambee
+      description: Get List of all empployees
+  '/employee/{id}':
+    get:
+      tags:
+        - health-contoller
+      operationId: employee_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EmployeeDao'
+              examples:
+                Employee 1:
+                  value:
+                    empId: 1
+                    firstName: Noah
+                    lastName: Blose
+                    email: nblose0@spiegel.de
+                    gender: Male
+                    company: Shuffletag
+                Employee 2:
+                  value:
+                    empId: 2
+                    firstName: Jo-anne
+                    lastName: Jira
+                    email: jjira1@spotify.com
+                    gender: Female
+                    company: Meedoo
+      description: Find an Employee by ID
+components:
+  schemas:
+    EmployeeDao:
+      type: object
+      properties:
+        empId:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        gender:
+          type: string
+        company:
+          type: string
